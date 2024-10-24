@@ -7,7 +7,7 @@ import locale
 
 st.set_page_config(layout= 'wide')
 
-with open("styles.css") as f:
+with open("css/styles.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html= True)
 
 # Define o locale para formato monetário brasileiro
@@ -35,11 +35,11 @@ def obter_url_servidor():
 
 # Função para obter a URL das safras
 def obter_url_safras(url_base):
-    return f"http://{url_base}/api/safras"
+    return f"http://{url_base}/centrocontrole/safras"
 
 # Função para obter a URL do demonstrativo
 def obter_url_demonstrativo(url_base):
-    return f"http://{url_base}/api/resultados/demonstrativo"
+    return f"http://{url_base}/resultados/demonstrativo"
 
 # Obtém o token
 token = obter_token()
@@ -53,7 +53,7 @@ st.sidebar.title('Filtros')
 ## Criação da lista do Filtro de Safras
 url_safras = obter_url_safras(url_servidor)
 param_token = {
-    "x-access-token": token
+    "Authorization": f"Bearer {token}"
 }
 safras = obter_safras(url_safras, param_token)
 
@@ -71,13 +71,10 @@ if filtro_safras:
 
 # URL Demonstrativo
 url_demonstrativo = obter_url_demonstrativo(url_servidor)
-param_safra = {
-  "safra": safra_selecionada
-}
 
 header_demonstrativo = {
-    "x-access-token": token,
-    "params": j.dumps(param_safra)
+    "Authorization": f"Bearer {token}",
+    "safra": safra_selecionada
 }
 
 with st.spinner("Carregando dados... "):
