@@ -6,7 +6,6 @@ WORKDIR /app
 
 COPY ./.streamlit ./.streamlit
 COPY ./fonts ./fonts
-COPY ./images ./images
 COPY ./css ./css
 COPY ./pages ./pages
 COPY ./requirements.txt .
