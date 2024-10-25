@@ -178,44 +178,45 @@ with st.spinner("Carregando dados... "):
             lista_itens.append(item)
 
     conta_principal_outros = indicadores['outros']
-    conta_outros = {
-        "codigo_conta": "00",
-        "descricao_conta": conta_principal_outros['descricao'].upper(),
-        "moeda": conta_principal_outros['moeda'],
-        "percentual_grupo": conta_principal_outros['percentualGrupo'],
-        "valor": conta_principal_outros['valor']
-    }
-    lista_contas_principais.append(conta_outros)
+    if conta_principal_outros.get('descricao'):
+        conta_outros = {
+            "codigo_conta": "00",
+            "descricao_conta": conta_principal_outros['descricao'].upper(),
+            "moeda": conta_principal_outros['moeda'],
+            "percentual_grupo": conta_principal_outros['percentualGrupo'],
+            "valor": conta_principal_outros['valor']
+        }
+        lista_contas_principais.append(conta_outros)
 
-    for dado_outros in conta_principal_outros['contas']:
-        for dado_sub in dado_outros['itens']['contas']:
-            item = {
-                "rotulo": "OUTROS",
-                "codigo_conta": dado_outros['codigo'],
-                "descricao_conta": dado_outros['descricao'],
-                "codigo_item": dado_sub['codigo'],
-                "descricao_item": dado_sub['descricao'],
-                "moeda": dado_sub['moeda'],
-                "percentual_geral": dado_sub['percentualGeral'],
-                "percentual_grupo": dado_sub['percentualGrupo'],
-                "valor": dado_sub['valor'],
-                "tipo_conta": "OUTROS CONTA"
-            }
-            lista_itens.append(item)
-        for dado_sub in dado_outros['itens']['outros']["contas"]:
-            item = {
-                "rotulo": "OUTROS",
-                "codigo_conta": dado_outros['codigo'],
-                "descricao_conta": dado_outros['descricao'],
-                "codigo_item": dado_sub['codigo'],
-                "descricao_item": dado_sub['descricao'],
-                "moeda": dado_sub['moeda'],
-                "percentual_geral": dado_sub['percentualGeral'],
-                "percentual_grupo": dado_sub['percentualGrupo'],
-                "valor": dado_sub['valor'],
-                "tipo_conta": "OUTROS OUTROS"
-            }
-            lista_itens.append(item)
+        for dado_outros in conta_principal_outros['contas']:
+            for dado_sub in dado_outros['itens']['contas']:
+                item = {
+                    "rotulo": "OUTROS",
+                    "codigo_conta": dado_outros['codigo'],
+                    "descricao_conta": dado_outros['descricao'],
+                    "codigo_item": dado_sub['codigo'],
+                    "descricao_item": dado_sub['descricao'],
+                    "moeda": dado_sub['moeda'],
+                    "percentual_geral": dado_sub['percentualGeral'],
+                    "percentual_grupo": dado_sub['percentualGrupo'],
+                    "valor": dado_sub['valor'],
+                    "tipo_conta": "OUTROS CONTA"
+                }
+                lista_itens.append(item)
+            for dado_sub in dado_outros['itens']['outros']["contas"]:
+                item = {
+                    "rotulo": "OUTROS",
+                    "codigo_conta": dado_outros['codigo'],
+                    "descricao_conta": dado_outros['descricao'],
+                    "codigo_item": dado_sub['codigo'],
+                    "descricao_item": dado_sub['descricao'],
+                    "moeda": dado_sub['moeda'],
+                    "percentual_geral": dado_sub['percentualGeral'],
+                    "percentual_grupo": dado_sub['percentualGrupo'],
+                    "valor": dado_sub['valor'],
+                    "tipo_conta": "OUTROS OUTROS"
+                }
+                lista_itens.append(item)
 
     df_contas_principais = pd.DataFrame(lista_contas_principais)
 
