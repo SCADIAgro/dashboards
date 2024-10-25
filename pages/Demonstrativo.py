@@ -145,14 +145,20 @@ with st.spinner("Carregando dados... "):
         df_atividade = pd.DataFrame(df, columns = ["codigo_atividade", "descricao_atividade"])
         with st.sidebar.expander('Atividade'):
             filtro_atividade = st.selectbox('Selecione', options = df_atividade['descricao_atividade'], placeholder = 'Opções')
-
+        
         if filtro_atividade:
             df = df[df["descricao_atividade"] == filtro_atividade]
-            df_item = df_item[df_item["atividade"] == filtro_atividade]
+            if not df_item.empty:
+                df_item = df_item[df_item["atividade"] == filtro_atividade]
+            else:
+                df_item = pd.DataFrame(columns=["atividade", "descricao", "valor"])
         else:
             primeira_atividade = df_atividade["descricao_atividade"].iloc[0]
             df = df[df["descricao_atividade"] == primeira_atividade]
-            df_item = df_item[df_item["descricao_atividade"] == primeira_atividade]
+            if not df_item.empty:
+                df_item = df_item[df_item["descricao_atividade"] == primeira_atividade]
+            else:
+                df_item = pd.DataFrame(columns=["atividade", "descricao", "valor"])
 
         ### Exibindo Subtítulo
         colunasubtitulo1, colunasubtitulo2 = st.columns(2)
