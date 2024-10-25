@@ -41,3 +41,13 @@ streamlit run Home.py
 Os Dashboards estão armazenados na pasta pages, com suas respectivas documentações na pasta docs e acessíveis através do endereço http://localhost:8501/{nome-do-dashboard}/ recebendo os parâmetros 'url'  e 'token'. 
 
 Exemplo: http://localhost:8501/Demonstrativo?url=endereco-servidor&token=valor-do-token
+
+
+## Executando o Aplicativo via Docker Compose 
+```bash
+docker compose up
+```
+
+Obs: Caso seja executado via docker, a aplicação estará disponível na porta 7700, conforme especificado no arquivo docker-compose.yaml.
+
+Exemplo: http://localhost:7700/{nome-do-dashboard}/
