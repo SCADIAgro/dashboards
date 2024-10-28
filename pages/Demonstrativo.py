@@ -22,8 +22,10 @@ def obter_safras(url, header):
         return resposta.json()
     except requests.exceptions.RequestException as e:
         st.error(f"Erro ao acessar a API: {e}")
+        st.stop()
     except ValueError as e:
         st.error(f"Erro ao carregar os dados: {e}")
+        st.stop()
 
 # Função para obter o token
 def obter_token():
@@ -224,5 +226,7 @@ with st.spinner("Carregando dados... "):
                     st.dataframe(tb_despesa_itens, use_container_width = True, hide_index = True)
     except requests.exceptions.RequestException as e:
         st.error(f"Erro ao acessar a API: {e}")
+        st.stop()
     except ValueError as e:
         st.error(f"Erro ao carregar os dados: {e}")
+        st.top()

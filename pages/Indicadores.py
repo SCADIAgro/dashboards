@@ -22,8 +22,10 @@ def obter_registros(url, header):
         return resposta.json()
     except requests.exceptions.RequestException as e:
         st.error(f"Erro ao acessar a API: {e}")
+        st.stop()
     except ValueError as e:
         st.error(f"Erro ao carregar os dados: {e}")
+        st.stop()
 
 # Função para obter o token
 def obter_token():
