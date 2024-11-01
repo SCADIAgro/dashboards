@@ -16,7 +16,7 @@ Para rodar o projeto localmente, siga os passos abaixo:
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/aloiziojr-scadi/dashboards.git 
+   git clone https://github.com/SCADIAgro/dashboards.git
    cd dashboards
 
 2. Crie um ambiente virtual (opcional, mas recomendado):
