@@ -120,6 +120,9 @@ with st.spinner("Carregando dados... "):
     with coluna_subtitulo_2:
         st.subheader(filtro_atividade)
         
+    if 'cod_atividade' not in df_atividades.columns:
+        df_atividades['cod_atividade'] = ''
+        
     codigo_atividade = df_atividades.loc[0, 'cod_atividade']
     param_indicadores = {
         "safra": safra_selecionada,  
